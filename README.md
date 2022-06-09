@@ -1,7 +1,7 @@
 # quest-submissions
 
 # Chapter 1 Day 1
-1. Explain what the Blockchain is in your own words. You can read this to help you, but you don't have to: https://www.investopedia.com/terms/b/blockchain.asp
+###### 1. Explain what the Blockchain is in your own words. You can read this to help you, but you don't have to: https://www.investopedia.com/terms/b/blockchain.asp
 
 The blockchain is a decentralized database that stores information, that is publically available for anyone to store information. Meaning that not only can anyone can view the stored data, but there's also no central authority. The information on the blockchain is collected and stored within blocks, and once full chain to other previously filled blocks; forming a chain, or blockchain. 
 
