@@ -1,5 +1,3 @@
-# cadence-bootcamp-quest-submissions
-
 # Chapter 1 Day 1
 #### 1. Explain what the Blockchain is in your own words. You can read this to help you, but you don't have to: https://www.investopedia.com/terms/b/blockchain.asp
 
