@@ -4,11 +4,11 @@ You wouldn't call changeGreeting inside of a script because, scripts are only us
 
 #### 2. What does the AuthAccount mean in the prepare phase of the transaction?
 
-The AuthAccount type accesses the data in a user's account, once a transaction is signed. 
+The AuthAccount type represents a signer's account, and it also accesses the data inside their account. This is done once, a transaction has been signed. 
 
 #### 3. What is the difference between the prepare phase and the execute phase in the transaction?
 
-The prepare phase in a transaction accesses the data in your account, whereas the execute phase can call functions in order to change data on the blockchain. Unlike the prepare phase, the execute phase cannot access a user's account data. 
+The prepare phase in a transaction accesses the data in your account through the AuthAccount type; which represents the user's account. Whereas the execute phase can call functions in order to change data on the blockchain. Unlike the prepare phase, the execute phase cannot access a user's account data, through the AuthAccount type. 
 
 #### 4. Add two new things inside your contract:
 - A variable named myNumber that has type Int (set it to 0 when the contract is deployed)
