@@ -1,3 +1,5 @@
+# Chapter 2 Day 3 - Quest Submissions
+
 #### 1. In a script, initialize an array (that has length == 3) of your favourite people, represented as Strings, and log it.
 ```JavaScript
 pub fun main() {
