@@ -25,7 +25,7 @@ The force unwrap operator _!_, returns the values within an optional. If there i
 ```JavaScript
 pub fun main(): UInt64 {
     var favPeople: {String: UInt64} = {"Arya Stark": 1, "Tyrion Lannister": 2, "Sandor Clegane" : 3}
-    return(favPeople["Arya Stark"])
+    return favPeople["Arya Stark"]
 }
 
 ```
@@ -35,7 +35,7 @@ In this example, we get an error similar to the question below _(mismatched type
 
 pub fun main(): UInt64 {
     var favPeople: {String: UInt64} = {"Arya Stark": 1, "Tyrion Lannister": 2, "Sandor Clegane" : 3}
-    return(favPeople["Arya Stark"])!
+    return favPeople["Arya Stark"]!
 }
 ```
 
