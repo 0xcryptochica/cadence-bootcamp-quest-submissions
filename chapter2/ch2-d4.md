@@ -1,7 +1,7 @@
 # Chapter 2 Day 4 - Quest Submissions
 
 #### 1. Deploy a new contract that has a Struct of your choosing inside of it (must be different than Profile).
-```JavaScript
+```Cadence
 pub contract clubInformation {
 
     pub struct clubHistory {
@@ -27,7 +27,7 @@ pub contract clubInformation {
 
 
 #### 2. Create a dictionary or array that contains the Struct you defined.
-```JavaScript
+```Cadence
 pub contract clubInformation {
 
     pub var clubs: {Address: clubHistory}
@@ -57,7 +57,7 @@ pub contract clubInformation {
 
 
 #### 3. Create a function to add to that array/dictionary.
-```JavaScript
+```Cadence
 pub contract clubInformation {
 
     pub var clubs: {Address: clubHistory}
@@ -94,7 +94,7 @@ pub contract clubInformation {
 
 
 #### 4.Add a transaction to call that function in step 3.
-```JavaScript
+```Cadence
 import clubInformation from 0x01
 
 transaction(clubName: String, clubAbbrv: String, championshipsWon: Int, stadium: String, founded: Int, account: Address) {
@@ -111,7 +111,7 @@ transaction(clubName: String, clubAbbrv: String, championshipsWon: Int, stadium:
 
 
 #### 5.Add a script to read the Struct you defined.
-```JavaScript
+```Cadence
 import clubInformation from 0x01
 
 pub fun main(account: Address): clubInformation.clubHistory? {
