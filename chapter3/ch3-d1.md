@@ -22,7 +22,7 @@ pub resource Jacob {
 
 }
 ```
-The type of this resource is _Jacob._
+The type of this resource is @Jacob.
 
 #### 6. Let's play the "I Spy" game from when we were kids. I Spy 4 things wrong with this code. Please fix them.
 ```Cadence
