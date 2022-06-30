@@ -21,11 +21,34 @@
 - You can't save anything to another user's account without them first signing a transaction, that contains the _AuthAccount_ type. 
 
 #### 6. Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
-- A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
-- A transaction that first saves the resource to account storage, then borrows a reference to it, and logs a field inside the resource.
-
 ```Cadence
-  
+  pub contract ArtistDiscography {
+
+    pub resource Discography {
+        pub var artistName: String
+        pub var numOfAlbums: Int
+
+        init() {
+            self.artistName = "Frank Ocean"
+            self.numOfAlbums = 2
+        }
+    } 
+
+    pub fun addNewArtist(): @Discography {
+        return <- create Discography()
+    }
+
+}
 ```
 
+- A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
+```Cadence
 
+
+```
+
+- A transaction that first saves the resource to account storage, then borrows a reference to it, and logs a field inside the resource.
+```Cadence
+
+
+```
