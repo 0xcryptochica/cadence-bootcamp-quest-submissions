@@ -43,12 +43,40 @@
 #### Then write 2 transactions: 
 - A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
 ```Cadence
+import ArtistDiscography from 0x01
 
+transaction() {
+
+  prepare(signer: AuthAccount) {
+    let newArtist <- ArtistDiscography.addNewArtist()
+    signer.save(<- newArtist, to: /storage/MyStates)
+    
+    let loadArtist <- signer.load<@ArtistDiscography.Discography>(from: /storage/MyArtistDiscography) ?? panic("No resource was found.")
+    log(loadArtist.artistName)
+    
+    destroy loadArtist
+  }
+
+  execute {}
+
+}
 
 ```
 
 - A transaction that first saves the resource to account storage, then borrows a reference to it, and logs a field inside the resource.
 ```Cadence
+import ArtistDiscography from 0x01
 
+transaction() {
+
+   prepare(signer: AuthAccount) {
+      let newArtist <- ArtistDiscography.addNewArtist()
+      signer.save(<- newArtist, to: /storage/MyArtistDiscography)
+        
+      let borrowArtist = signer.borrow<&ArtistDiscography.Discography>(from: /storage/MyArtistDiscography) ?? panic("No resource found.")
+      log(borrowArtist.artistName)
+  }
+
+}
 
 ```
