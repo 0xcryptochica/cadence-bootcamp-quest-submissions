@@ -50,18 +50,44 @@ pub contract ArtistDiscography {
 #### Then, do the following:
 - In a transaction, save the resource to storage and link it to the public with the restrictive interface.
 ```Cadence
+import ArtistDiscography from 0x01
 
+transaction() {
+    prepare(signer: AuthAccount) {
+        signer.save(<- ArtistDiscography.addNewArtist(), to: /storage/MyArtistDiscography)
+        signer.link<&ArtistDiscography.Discography>(/public/MyArtistDiscography, target: /storage/MyArtistDiscography)
+    
+    }
+
+    execute {}
+}
 
 ```
 
 - Run a script that tries to access a non-exposed field in the resource interface, and see the error pop up.
 ```Cadence
+import ArtistDiscography from 0x01
+pub fun main(address: Address): String {
+    let artistCapability: Capability<&ArtistDiscography.Discography{ArtistDiscography.IDiscography}> = 
+      getAccount(address).getCapability<&ArtistDiscography.Discography{ArtistDiscography.IDiscography}>(/public/MyArtistDiscography)
+    
+    let discographyResource: &ArtistDiscography.Discography{ArtistDiscography.IDiscography} = artistCapability.borrow() ?? panic("The capability does not exist.")
 
+    return discographyResource.firstAlbum // Produces an error: `member of restricted type does not accessible: firstAlbum`
+}
 
 ```
 
 - Run the script and access something you CAN read from. Return it from the script.
 ```Cadence
+import ArtistDiscography from 0x01
+pub fun main(address: Address): String {
+    let artistCapability: Capability<&ArtistDiscography.Discography{ArtistDiscography.IDiscography}> = 
+      getAccount(address).getCapability<&ArtistDiscography.Discography{ArtistDiscography.IDiscography}>(/public/MyArtistDiscography)
+    
+    let discographyResource: &ArtistDiscography.Discography{ArtistDiscography.IDiscography} = artistCapability.borrow() ?? panic("The capability does not exist.")
 
+    return discographyResource.artistName
+}
 
 ```
