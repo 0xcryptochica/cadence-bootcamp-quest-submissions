@@ -15,7 +15,7 @@ pub contract ArtistDiscography {
         pub var numOfAlbums: Int
     }
 
-    pub resource Discography {
+    pub resource Discography: IDiscography {
         pub var artistName: String
         pub var numOfAlbums: Int
         pub var firstAlbum: String
