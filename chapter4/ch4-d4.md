@@ -35,6 +35,7 @@ pub contract CryptoPoops {
 
   // This Collection resource lets us store 
   // multiple resources within the same storage path
+  // while also implementing the CollectionPublic interface
   pub resource Collection: CollectionPublic {
     pub var ownedNFTs: @{UInt64: NFT}
 
@@ -52,6 +53,10 @@ pub contract CryptoPoops {
 
     // Returns an array of the NFT ids 
     // stored within our Collection
+
+    // Returns a reference to the NFTs 
+    // associated with the ownedNFT dictionary 
+    // by taking in an id as input 
     pub fun getIDs(): [UInt64] {
       return self.ownedNFTs.keys
     }
@@ -103,5 +108,4 @@ pub contract CryptoPoops {
     self.account.save(<- create Minter(), to: /storage/Minter)
   }
 }
-
 ```
