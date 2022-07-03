@@ -83,7 +83,14 @@ pub contract ArtistDiscography {
 
 ```
 
-#### 4. For each of the functions below (numberOne, numberTwo, numberThree), follow the instructions.
+#### 4. For each of the functions below (numberOne, numberTwo, numberThree), follow the instructions
+
+- _func. numberOne()_: This function will log _'Jacob'_, because _name_ is equal to 5 characters in length. 
+
+- _func. numberTwo()_: This function returns the value, _'Jacob Tucker'_ because it meets both the pre and post-conditions, and returns the concatenated value _result._
+
+- _func. numberThree()_: _'self.number'_, will not log the updated number because, it does not meet the pre-condition and instead aborts the program.  
+
 ```Cadence
 pub contract Test {
 
