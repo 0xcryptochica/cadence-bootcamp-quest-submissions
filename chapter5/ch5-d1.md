@@ -1,7 +1,7 @@
 # Chapter 5 Day 1 - Quest Submissions
 
 #### 1. Describe what an event is, and why it might be useful to a client.
-
+- An event is way of communicating that something has occurred within our smart contracts. This could be useful for a client because, if we had a _totalSupply_ variable in our contract (similar to the examples in the lesson), and used an event to update the _totalSupply_ when minting an NFT a client could see how many NFTs are still to be minted. 
 
 #### 2. Deploy a contract with an event in it, and emit the event somewhere else in the contract indicating that it happened.
 ```Cadence
