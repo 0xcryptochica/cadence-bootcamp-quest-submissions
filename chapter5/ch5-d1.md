@@ -57,7 +57,7 @@ pub contract ArtistDiscography {
 
     pub fun updateDiscography(numOfAlbums: Int) {
         post {
-            before(self.numOfAlbums) == self.numOfAlbums + 1
+            self.numOfAlbums == before(self.numOfAlbums) + 1
         }
     }
 
@@ -66,7 +66,7 @@ pub contract ArtistDiscography {
             self.previousAlbum = "IGOR"
             self.albumTitle = "Call Me If You Get Lost"
             self.numOfTracks = 16 
-            self.numOfAlbums = 6
+            self.numOfAlbums = 5
             emit newAlbum(id: self.id, previousAlbum: self.previousAlbum, albumTitle: self.albumTitle, numOfTracks: self.numOfTracks, numOfAlbums: self.numOfAlbums)
 
         }
@@ -80,7 +80,6 @@ pub contract ArtistDiscography {
     init() {}
 
 }
-
 ```
 
 #### 4. For each of the functions below (numberOne, numberTwo, numberThree), follow the instructions
