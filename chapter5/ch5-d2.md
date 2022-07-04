@@ -1,7 +1,7 @@
 # Chapter 5 Day 2 - Quest Submissions
 
 #### 1. Explain why standards can be beneficial to the Flow ecosystem.
--
+- Standards are beneficial because with standards it's easier to understand the type of contract you might be working with, and eliminating the need to implement a different functionality for each contract you wish to deploy. 
 
 #### 2. What is YOUR favourite food?
 - Fried chicken. 😋
