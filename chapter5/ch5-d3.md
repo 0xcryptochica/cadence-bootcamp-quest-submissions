@@ -7,7 +7,8 @@
 - _Auth_ is used with references in order to downcast. Since, references need an authorized reference, we need to use _auth_ before the reference, in order to properly downcast it. For example, we used _auth_ in our CryptoPoops contract as well: 
   - _(&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!_
 
-#### 3. This last quest will be your most difficult yet. Take this contract:
+#### 3. Take this contract, and add a function called borrowAuthNFT just like we did in the section called _"The Problem"_. Then, find a way to make it publically accessible to other people so they can read our NFT's metadata. Then, run a script to display the NFTs metadata for a certain id. 
+
 ```Cadence
 import NonFungibleToken from 0x02
 pub contract CryptoPoops: NonFungibleToken {
@@ -89,7 +90,7 @@ pub contract CryptoPoops: NonFungibleToken {
   }
 }
 ```
-#### and add a function called borrowAuthNFT just like we did in the section called "The Problem" above. Then, find a way to make it publically accessible to other people so they can read our NFT's metadata. Then, run a script to display the NFTs metadata for a certain id. You will have to write all the transactions to set up the accounts, mint the NFTs, and then the scripts to read the NFT's metadata.
+#### 
 ```Cadence
 
 ```
