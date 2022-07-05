@@ -1,8 +1,11 @@
 # Chapter 5 Day 3 - Quest Submissions
 
 #### 1. What does "force casting" with as! do? Why is it useful in our Collection?
+- Force casting will take a generic type and downcast it into a more specifc type. For example, in our _CryptoPoops_ contract we had to add a force cast to our _deposit_ function, in order to downcast the _@NonFungibleToken.NFT_ type to _@NFT_. This is useful in our Collection because, instead of being able to deposit any NFT into our collection, we can ensure that only the specific or correct NFTs are being deposited instead. 
 
 #### 2. What does auth do? When do we use it?
+- _Auth_ is used with references in order to downcast. Since, references need an authorized reference, we need to use _auth_ before the reference, in order to properly downcast it. For example, we used _auth_ in our CryptoPoops contract as well: 
+  - _(&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!_
 
 #### 3. This last quest will be your most difficult yet. Take this contract:
 ```Cadence
