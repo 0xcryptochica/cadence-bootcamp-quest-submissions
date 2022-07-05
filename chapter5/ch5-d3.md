@@ -34,7 +34,12 @@ pub contract CryptoPoops: NonFungibleToken {
     }
   }
 
-  pub resource Collection: NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic {
+  // Make `borrowAuthNFT` public 
+  pub resource interface CollectionPublic {
+    pub fun borrowAuthNFT(id: UInt64): &NFT
+  }
+
+  pub resource Collection: NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, CollectionPublic {
     pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
     pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
@@ -58,6 +63,11 @@ pub contract CryptoPoops: NonFungibleToken {
       return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
     }
 
+    pub fun borrowAuthNFT(id: UInt64): &NFT {
+	    let ref = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
+	    return ref as! &NFT
+    }
+
     init() {
       self.ownedNFTs <- {}
     }
@@ -65,8 +75,8 @@ pub contract CryptoPoops: NonFungibleToken {
     destroy() {
       destroy self.ownedNFTs
     }
-  }
 
+  }
   pub fun createEmptyCollection(): @NonFungibleToken.Collection {
     return <- create Collection()
   }
@@ -90,7 +100,54 @@ pub contract CryptoPoops: NonFungibleToken {
   }
 }
 ```
-#### 
-```Cadence
+- Create Collection:
 
+```Cadence
+import CryptoPoops from 0x01
+import NonFungibleToken from 0x02
+
+transaction {
+    prepare(signer: AuthAccount) {
+        signer.save(<- CryptoPoops.createEmptyCollection(), to: /storage/CryptoPoopsCollection)
+        signer.link<&CryptoPoops.Collection{NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, CryptoPoops.CollectionPublic}>(/public/CryptoPoopsCollection, target: /storage/CryptoPoopsCollection)
+    
+    }
+
+}
+```
+- Transaction used to mint NFTs:
+```Cadence
+import CryptoPoops from 0x01
+import NonFungibleToken from 0x02
+
+transaction(recipient: Address, name: String, favouriteFood: String, luckyNumber: Int) {
+    prepare(signer: AuthAccount) {
+        let minter = signer.borrow<&CryptoPoops.Minter>(from: /storage/Minter) ?? panic("This signer did not deploy this contract.")
+        let recipientsCollection = getAccount(recipient).getCapability(/public/CryptoPoopsCollection).borrow<&CryptoPoops.Collection{NonFungibleToken.CollectionPublic}>() ?? panic("The recipient does not have a Collection.")
+
+        let nft <- minter.createNFT(name: name, favouriteFood: favouriteFood, luckyNumber: luckyNumber)
+        recipientsCollection.deposit(token: <- nft)
+    }
+
+}
+```
+- Script used to get IDs:
+```Cadence
+import CryptoPoops from 0x01
+import NonFungibleToken from 0x02
+
+pub fun main(address: Address): [UInt64] {
+    let account = getAccount(address).getCapability(/public/CryptoPoopsCollection).borrow<&CryptoPoops.Collection{NonFungibleToken.CollectionPublic}>() ?? panic("This address does not have a Collection.")
+    return account.getIDs()
+}
+```
+- Script to read metadata:
+```Cadence
+import CryptoPoops from 0x01
+import NonFungibleToken from 0x02
+
+pub fun main(address: Address, id: UInt64): &CryptoPoops.NFT {
+    let nftMetadata = getAccount(address).getCapability(/public/CryptoPoopsCollection).borrow<&CryptoPoops.Collection{CryptoPoops.CollectionPublic}>() ?? panic("Cannot access collection.")
+    return nftMetadata.borrowAuthNFT(id: id)
+}
 ```
