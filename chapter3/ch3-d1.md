@@ -2,7 +2,7 @@
 
 #### 1. In words, list 3 reasons why structs are different from resources.
 
-Structs and resources at first glance may seem similar, however they are very different. Mainly due to the fact that, Structs can be copied, lost or overwritten, and can also be created anywhere. This is howeverm false for resources. 
+Structs and resources at first glance may seem similar, however they are very different. Mainly due to the fact that, Structs can be copied, lost or overwritten, and can also be created anywhere. This is however false for resources. 
 
 #### 2. Describe a situation where a resource might be better to use than a struct.
 
